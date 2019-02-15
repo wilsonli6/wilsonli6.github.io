@@ -7,7 +7,7 @@
 
 
 
-let backgroundImage
+let backgroundImage;
 let adidas;
 let nike;
 let puma;
@@ -31,13 +31,13 @@ function draw() {
   image(adidas, mouseX, mouseY, adidas.width*scalar, adidas.height*scalar);
 }
 function keyPressed(){
-	if (key === "a" || key === "A"){
-		image(adidas, mouseX, mouseY, adidas.width*scalar, adidas.height*scalar);
+  if (key === "a" || key === "A"){
+    image(adidas, mouseX, mouseY, adidas.width*scalar, adidas.height*scalar);
   }
   if (key === "n" || key === "N"){
     image(nike, mouseX, mouseY, nike.width*scalar, nike.height*scalar);
   }
-    if (key === "p" || key === "P"){
+  if (key === "p" || key === "P"){
     image(puma, mouseX, mouseY, puma.width*scalar, puma.height*scalar);
   }
 }
