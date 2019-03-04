@@ -5,8 +5,6 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-
-
 let x = 100;
 let y = 100;
 let shoeX, shoeY;
@@ -37,12 +35,11 @@ function setup() {
 }
 
 function draw() {
-  // background(backgroundImage);
   imageMode(CORNER);
   image(backgroundImage, 0, 0, width, height);
   
   imageMode(CENTER);
-  
+  //move the logo
   if (whichImage === "adidas") {
   	image(adidas, x, y, adidas.width*scalar, adidas.height*scalar);
   }
@@ -67,12 +64,10 @@ function draw() {
   if (keyIsDown(DOWN_ARROW)) {
     y += 5;
   }
-  // clear();
-  // imageMode(CORNER);
-  // image(backgroundImage, 0, 0, width, height);
-  // fill(255,0,255);
+  
 }
 function keyPressed(){
+  //change the logo
 	if (key === "a" || key === "A"){
     whichImage = "adidas";
     scalar = 0.1;
