@@ -12,6 +12,7 @@ let backgroundImage;
 let scalar;
 let whichImage;
 let dx, dy;
+let px, py;
 let rectWidth, rectHeight;
 
 function preload() {
@@ -31,8 +32,8 @@ function setup() {
   imageScalar = 0.06;
   shoeX = width/2;
   shoeY = height/2;
-  dy = random(2,5);
-  dx = random(3,6);
+  py = random(2,10);
+  px = random(2,10);
   rectWidth = pumashoe.width *imageScalar;
   rectHeight = pumashoe.height *imageScalar;
 }
@@ -44,7 +45,7 @@ function draw() {
   imageMode(CENTER);
   //move the logo
   if (whichImage === "adidas") {
-  	image(adidas, x, y, adidas.width*scalar, adidas.height*scalar);
+    image(adidas, x, y, adidas.width*scalar, adidas.height*scalar);
   }
   if (whichImage === "nike") {
     image(nike, x, y, nike.width*scalar, nike.height*scalar);
