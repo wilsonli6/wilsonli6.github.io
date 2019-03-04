@@ -7,19 +7,33 @@
 
 
 
+let x = 100;
+let y = 100;
+let shoeX, shoeY;
 let backgroundImage;
-let adidas;
-let nike;
-let puma;
 let scalar;
+let whichImage;
+let dx, dy;
+let rectWidth, rectHeight;
 
 function preload() {
-  adidas = loadImage("assets/adidas.png");
+  adidas = loadImage("adidas.png");
+  nike = loadImage("nike.png");
+  puma = loadImage("puma.png");
+  pumashoe = loadImage("pumashoe.png");
 }
 function setup() {
-  backgroundImage = loadImage("assets/sneaker.png");
+  backgroundImage = loadImage("sneaker.png");
   createCanvas(650,650);
   scalar = 0.1;
+  whichImage = "adidas";
+  imageScalar = 0.06;
+  shoeX = width/2;
+  shoeY = height/2;
+  dy = random(2,5);
+  dx = random(3,6);
+  rectWidth = pumashoe.width *imageScalar;
+  rectHeight = pumashoe.height *imageScalar;
 }
 
 function draw() {
@@ -28,16 +42,50 @@ function draw() {
   image(backgroundImage, 0, 0, width, height);
   
   imageMode(CENTER);
-  image(adidas, mouseX, mouseY, adidas.width*scalar, adidas.height*scalar);
+  
+  if (whichImage === "adidas") {
+  	image(adidas, x, y, adidas.width*scalar, adidas.height*scalar);
+  }
+  if (whichImage === "nike") {
+    image(nike, x, y, nike.width*scalar, nike.height*scalar);
+  }
+  if (whichImage === "puma") {
+    image(puma, x, y, puma.width*scalar, puma.height*scalar);
+  }
+  if (keyIsDown(LEFT_ARROW)) {
+    x -= 5;
+  }
+
+  if (keyIsDown(RIGHT_ARROW)) {
+    x += 5;
+  }
+
+  if (keyIsDown(UP_ARROW)) {
+    y -= 5;
+  }
+
+  if (keyIsDown(DOWN_ARROW)) {
+    y += 5;
+  }
+  // clear();
+  // imageMode(CORNER);
+  // image(backgroundImage, 0, 0, width, height);
+  // fill(255,0,255);
 }
 function keyPressed(){
-  if (key === "a" || key === "A"){
-    image(adidas, mouseX, mouseY, adidas.width*scalar, adidas.height*scalar);
+	if (key === "a" || key === "A"){
+    whichImage = "adidas";
+    scalar = 0.1;
+		// image(adidas, mouseX, mouseY, adidas.width*scalar, adidas.height*scalar);
   }
   if (key === "n" || key === "N"){
-    image(nike, mouseX, mouseY, nike.width*scalar, nike.height*scalar);
+    whichImage = "nike";
+    scalar = 0.25;
+    // image(nike, mouseX, mouseY, nike.width*scalar, nike.height*scalar);
   }
-  if (key === "p" || key === "P"){
-    image(puma, mouseX, mouseY, puma.width*scalar, puma.height*scalar);
+    if (key === "p" || key === "P"){
+    whichImage = "puma";
+    scalar = 0.16;
+    // image(puma, mouseX, mouseY, puma.width*scalar, puma.height*scalar);
   }
 }
