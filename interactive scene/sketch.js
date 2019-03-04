@@ -11,11 +11,13 @@ let shoeX, shoeY;
 let backgroundImage;
 let scalar;
 let whichImage;
+let whichShoe;
 let dx, dy;
 let px, py;
-let rectWidth, rectHeight;
+let shoeWidth, shoeHeight;
 
 function preload() {
+  //load the images
   adidas = loadImage("assets/adidas.png");
   nike = loadImage("assets/nike.png");
   puma = loadImage("assets/puma.png");
@@ -28,14 +30,14 @@ function setup() {
   backgroundImage = loadImage("assets/sneaker.png");
   createCanvas(650,650);
   scalar = 0.1;
+  //choose the first image to appear
   whichImage = "adidas";
-  imageScalar = 0.06;
+  whichShoe = "pumaShoe";
+  imageScalar = 0.2;
   shoeX = width/2;
   shoeY = height/2;
   py = random(2,10);
   px = random(2,10);
-  rectWidth = pumashoe.width *imageScalar;
-  rectHeight = pumashoe.height *imageScalar;
 }
 
 function draw() {
@@ -67,6 +69,25 @@ function draw() {
 
   if (keyIsDown(DOWN_ARROW)) {
     y += 5;
+  }
+
+  //display the shoe
+  //rect(x, y, rectWidth, rectHeight);
+  if (whichShoe === "pumaShoe") {
+    image(pumaShoe, shoeX, shoeY, whichShoe * imageScalar, whichShoe *imageScalar);
+  }
+  // move the shoe
+  shoeX += px;
+  shoeY += py;
+  
+  
+  //check for bounce
+  if (shoeX + shoeWidth >= width || shoeX <=0) {
+    px = -1 * px;
+  }
+    
+  if (shoeY + shoeHeight >= height || shoeY <=0) {
+    py = -1 * py;
   }
   
 }
