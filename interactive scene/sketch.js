@@ -80,7 +80,6 @@ function draw() {
   shoeX += px;
   shoeY += py;
   
-  
   //check for bounce
   if (shoeX + whichShoe >= width || shoeX <=0) {
     px = -1 * px;
