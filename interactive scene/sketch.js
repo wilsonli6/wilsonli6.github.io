@@ -19,6 +19,9 @@ function preload() {
   nike = loadImage("assets/nike.png");
   puma = loadImage("assets/puma.png");
   pumashoe = loadImage("assets/pumashoe.png");
+  adidasShoe = loadImage("assets/adidasShoe.png");
+  pumaShoe = loadImage("assets/pumaShoe.png");
+  nikeShoe = loadImage("assets/nikeShoe.png");
 }
 function setup() {
   backgroundImage = loadImage("assets/sneaker.png");
