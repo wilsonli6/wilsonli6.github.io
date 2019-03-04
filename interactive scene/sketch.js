@@ -15,13 +15,13 @@ let dx, dy;
 let rectWidth, rectHeight;
 
 function preload() {
-  adidas = loadImage("adidas.png");
-  nike = loadImage("nike.png");
-  puma = loadImage("puma.png");
-  pumashoe = loadImage("pumashoe.png");
+  adidas = loadImage("assets/adidas.png");
+  nike = loadImage("assets/nike.png");
+  puma = loadImage("assets/puma.png");
+  pumashoe = loadImage("assets/pumashoe.png");
 }
 function setup() {
-  backgroundImage = loadImage("sneaker.png");
+  backgroundImage = loadImage("assets/sneaker.png");
   createCanvas(650,650);
   scalar = 0.1;
   whichImage = "adidas";
