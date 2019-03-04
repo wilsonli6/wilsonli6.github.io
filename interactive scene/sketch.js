@@ -74,7 +74,7 @@ function draw() {
   //display the shoe
   //rect(x, y, rectWidth, rectHeight);
   if (whichShoe === "pumaShoe") {
-    image(pumaShoe, shoeX, shoeY, whichShoe * imageScalar, whichShoe *imageScalar);
+    image(pumaShoe, shoeX, shoeY, pumaShoe.width * imageScalar, pumaShoe.height * imageScalar);
   }
   // move the shoe
   shoeX += px;
@@ -82,11 +82,11 @@ function draw() {
   
   
   //check for bounce
-  if (shoeX + shoeWidth >= width || shoeX <=0) {
+  if (shoeX + whichShoe >= width || shoeX <=0) {
     px = -1 * px;
   }
     
-  if (shoeY + shoeHeight >= height || shoeY <=0) {
+  if (shoeY + whichShoe >= height || shoeY <=0) {
     py = -1 * py;
   }
   
