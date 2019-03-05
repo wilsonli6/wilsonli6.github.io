@@ -28,7 +28,7 @@ function displaySquare(){
 }
 
 function determineState(){
-    if (state ===1 && x >= width - squareSize){
+    if (state === 1 && x >= width - squareSize){
         state = 2;
         x = width - squareSize; //hug the right hand wall
     }
@@ -40,7 +40,7 @@ function determineState(){
         state = 4;
         x = 0;
     }
-    else if (state === 4 & y<= 0){
+    else if (state === 4 & y <= 0){
         state = 1;
         y = 0;
     }
@@ -51,13 +51,13 @@ function moveAccordingToState(){
     if (state === 1){
         x += speed;
     }
-    else if (state===2){
+    else if (state === 2){
         y +=speed;
     }
-    else if  (state===3){
+    else if  (state === 3){
         x -= speed;
     }
-    else if (state ===4){
+    else if (state === 4){
         y -= speed;
     }
 }
