@@ -21,7 +21,6 @@ function preload() {
   adidas = loadImage("assets/adidas.png");
   nike = loadImage("assets/nike.png");
   puma = loadImage("assets/puma.png");
-  pumashoe = loadImage("assets/pumashoe.png");
   adidasShoe = loadImage("assets/adidasShoe.png");
   pumaShoe = loadImage("assets/pumaShoe.png");
   nikeShoe = loadImage("assets/nikeShoe.png");
@@ -81,11 +80,11 @@ function draw() {
   shoeY += py;
   
   //check for bounce
-  if (shoeX + whichShoe >= width || shoeX <=0) {
+  if (shoeX >= width || shoeX <=0) {
     px = -1 * px;
   }
     
-  if (shoeY + whichShoe >= height || shoeY <=0) {
+  if (shoeY >= height || shoeY <=0) {
     py = -1 * py;
   }
   
