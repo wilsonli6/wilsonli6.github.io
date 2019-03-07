@@ -32,17 +32,20 @@ function preload() {
 function setup() {
   createCanvas(650,650);
   backgroundImage = loadImage("assets/sneaker.png");
+  // scale the images down to the right size
   scalar = 0.1;
-  imageScalar = 0.2;
   //choose the first image to appear
   whichImage = "adidas";
   whichShoe = ["adidasShoe", "pumaShoe", "nikeShoe"];
   newShoe = random(whichShoe);
   newShoe;
+  // create x and y values for the shoes
   shoeX = width/2;
   shoeY = height/2;
+  // the shoes will fly around at different rates
   py = random(2,10);
   px = random(2,10);
+  // points system
   points = 0;
 }
 
@@ -78,16 +81,16 @@ function draw() {
     y += 5;
   }
   //display the shoe
-  if (whichShoe === "pumaShoe") {
+  if (newShoe === "pumaShoe") {
     imageScalar = 0.2;
     image(pumaShoe, shoeX, shoeY, pumaShoe.width * imageScalar, pumaShoe.height * imageScalar);
   }
-  if (whichShoe === "nikeShoe") {
-    imageScalar - 0.9;
+  if (newShoe === "nikeShoe") {
+    imageScalar = 0.45;
     image(nikeShoe, shoeX, shoeY, nikeShoe.width * imageScalar, nikeShoe.height * imageScalar)
   }
-  if (whichShoe === "adidasShoe") {
-    imageScalar = 0.9;
+  if (newShoe === "adidasShoe") {
+    imageScalar = 0.2;
     image(adidasShoe, shoeX, shoeY, adidasShoe.width * imageScalar, adidasShoe.height * imageScalar)
   }
   //move the shoe
@@ -105,24 +108,24 @@ function draw() {
 
   //switch the shoe depending on the contact
   function shoeSwitch(){
-    if (whichShoe === "pumaShoe" && whichImage === "puma" &&
-    (shoeX <= (x + 5) && shoeY <= (y + 5))) {
+    if (newShoe === "pumaShoe" && whichImage === "puma" &&
+    (shoeX <= (x + 100) && shoeY <= (y + 100))) {
       points += 1;
-      newShoe;
+      newShoe = random(whichShoe);
     }
-    else if (whichShoe === "nikeShoe" && whichImage === "nike" &&
-    (shoeX <= (x + 5) && shoeY <= (y + 5))) {
+    else if (newShoe === "nikeShoe" && whichImage === "nike" &&
+    (shoeX <= (x + 100) && shoeY <= (y + 100))) {
       points += 1;
-      newShoe;
+      newShoe = random(whichShoe);
     }
-    else if (whichShoe === "adidasShoe" && whichImage === "adidas" &&
-    (shoeX <= (x + 5) && shoeY <= (y + 5))) {
+    else if (newShoe === "adidasShoe" && whichImage === "adidas" &&
+    (shoeX <= (x + 100) && shoeY <= (y + 100))) {
       points += 1;
-      newShoe;
+      newShoe = random(whichShoe);
     }
-    else if (shoeX <= (x + 5) && shoeY <= (y + 5)){
+    else if (shoeX <= (x + 100) && shoeY <= (y + 100)){
       points = 0;
-      newShoe;
+      newShoe = random(whichShoe);
     }
   }
 
