@@ -54,6 +54,7 @@ function draw() {
   image(backgroundImage, 0, 0, width, height);
   imageMode(CENTER);
   shoeSwitch;
+  console.log(points);
   //display the logo
   if (whichImage === "adidas") {
     image(adidas, x, y, adidas.width*scalar, adidas.height*scalar);
@@ -109,24 +110,26 @@ function draw() {
   //switch the shoe depending on the contact
   function shoeSwitch(){
     if (newShoe === "pumaShoe" && whichImage === "puma" &&
-    (shoeX <= (x + 100) && shoeY <= (y + 100))) {
+    (shoeX >= x && shoeY >= y)) {
       points += 1;
       newShoe = random(whichShoe);
     }
     else if (newShoe === "nikeShoe" && whichImage === "nike" &&
-    (shoeX <= (x + 100) && shoeY <= (y + 100))) {
+    (shoeX >= x && shoeY >= y)) {
       points += 1;
       newShoe = random(whichShoe);
     }
     else if (newShoe === "adidasShoe" && whichImage === "adidas" &&
-    (shoeX <= (x + 100) && shoeY <= (y + 100))) {
+    (shoeX >= x && shoeY >= y)) {
       points += 1;
       newShoe = random(whichShoe);
     }
-    else if (shoeX <= (x + 100) && shoeY <= (y + 100)){
+    else if (shoeX >= x && shoeY >= y){
       points = 0;
       newShoe = random(whichShoe);
     }
+    py = random(2,10);
+    px = random(2,10);
   }
 
   }
