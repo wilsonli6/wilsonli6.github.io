@@ -20,6 +20,7 @@ let dx, dy;
 let px, py;
 let shoeWidth, shoeHeight;
 let points;
+let music;
 
 function preload() {
   //load the images
@@ -29,6 +30,8 @@ function preload() {
   adidasShoe = loadImage("assets/adidasShoe.png");
   pumaShoe = loadImage("assets/pumaShoe.png");
   nikeShoe = loadImage("assets/nikeShoe.png");
+  //load song
+  song = loadSound("assets/violin.mp3")
 }
 function setup() {
   createCanvas(650,650);
@@ -48,6 +51,7 @@ function setup() {
   px = random(2,10);
   // points system
   points = 0;
+  music = true
 }
 
 function draw() {
@@ -55,6 +59,10 @@ function draw() {
   image(backgroundImage, 0, 0, width, height);
   imageMode(CENTER);
   console.log(points);
+  //allow for music
+  if (music === true){
+    mousePressed();
+  }
   //display the logo
   if (whichImage === "adidas") {
     image(adidas, x, y, adidas.width*scalar, adidas.height*scalar);
@@ -80,6 +88,7 @@ function draw() {
 
   if (keyIsDown(DOWN_ARROW)) {
     y += 5;
+  }
   }
   //display the shoe
   if (newShoe === "pumaShoe") {
@@ -109,7 +118,6 @@ function draw() {
   if (shoeY >= height || shoeY <=0) {
     py = -1 * py;
   }
-}
 //see if the shoe is touching the logo  
 function shoeTouching(){
     if (Math.abs(shoeX - x) <= 100 && Math.abs(shoeY-y) <= 100)
@@ -156,5 +164,13 @@ function keyPressed(){
   if (key === "p" || key === "P"){
     whichImage = "puma";
     scalar = 0.16;
+  }
+}
+function mousePressed(){
+  if (song.isPlaying()){
+    song.stop();
+  }
+  else {
+    song.play();
   }
 }
