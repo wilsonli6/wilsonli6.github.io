@@ -7,6 +7,7 @@
 //I made it so that the shoe would switch if there was correct contact with the logo
 //console.log shows your score. Math the right logo with the right shoe!
 //use the arrow keys to move the logo
+//for music click the mouse
 
 let x = 100;
 let y = 100;
@@ -23,6 +24,7 @@ let points;
 let music;
 
 function preload() {
+  soundFormats("mp3");
   //load the images
   adidas = loadImage("assets/adidas.png");
   nike = loadImage("assets/nike.png");
@@ -31,7 +33,7 @@ function preload() {
   pumaShoe = loadImage("assets/pumaShoe.png");
   nikeShoe = loadImage("assets/nikeShoe.png");
   //load song
-  song = loadSound("assets/violin.mp3")
+  song = loadSound("assets/300 Violin Orchestra - Jorge Quintero (High Quality).mp3");
 }
 function setup() {
   createCanvas(650,650);
@@ -42,7 +44,6 @@ function setup() {
   whichImage = "adidas";
   whichShoe = ["adidasShoe", "pumaShoe", "nikeShoe"];
   newShoe = random(whichShoe);
-  newShoe;
   // create x and y values for the shoes
   shoeX = width/2;
   shoeY = height/2;
@@ -51,7 +52,6 @@ function setup() {
   px = random(2,10);
   // points system
   points = 0;
-  music = true
 }
 
 function draw() {
@@ -59,10 +59,7 @@ function draw() {
   image(backgroundImage, 0, 0, width, height);
   imageMode(CENTER);
   console.log(points);
-  //allow for music
-  if (music === true){
-    mousePressed();
-  }
+
   //display the logo
   if (whichImage === "adidas") {
     image(adidas, x, y, adidas.width*scalar, adidas.height*scalar);
@@ -89,7 +86,7 @@ function draw() {
   if (keyIsDown(DOWN_ARROW)) {
     y += 5;
   }
-  }
+
   //display the shoe
   if (newShoe === "pumaShoe") {
     imageScalar = 0.2;
@@ -109,18 +106,29 @@ function draw() {
   //move the shoe
   shoeX += px;
   shoeY += py;
-  
+    
   //check for bounce
   if (shoeX >= width || shoeX <=0) {
     px = -1 * px;
   }
-    
+      
   if (shoeY >= height || shoeY <=0) {
     py = -1 * py;
   }
+}
+function mousePressed(){
+  if (song.isPlaying()){
+    song.stop();
+  }
+  else {
+    song.play();
+  }
+}
+
+
 //see if the shoe is touching the logo  
 function shoeTouching(){
-    if (Math.abs(shoeX - x) <= 100 && Math.abs(shoeY-y) <= 100)
+  if (Math.abs(shoeX - x) <= 100 && Math.abs(shoeY-y) <= 100)
     shoeSwitch();
 
   //switch the shoe if the shoe touches the logo
@@ -150,10 +158,10 @@ function shoeTouching(){
     py = random(2,10);
     px = random(2,10);
   }
-  }
+}
 function keyPressed(){
   //change the logo
-	if (key === "a" || key === "A"){
+  if (key === "a" || key === "A"){
     whichImage = "adidas";
     scalar = 0.1;
   }
@@ -164,13 +172,5 @@ function keyPressed(){
   if (key === "p" || key === "P"){
     whichImage = "puma";
     scalar = 0.16;
-  }
-}
-function mousePressed(){
-  if (song.isPlaying()){
-    song.stop();
-  }
-  else {
-    song.play();
   }
 }
