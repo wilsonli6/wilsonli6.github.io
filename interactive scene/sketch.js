@@ -5,6 +5,8 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 //I made it so that the shoe would switch if there was correct contact with the logo
+//console.log shows your score. Math the right logo with the right shoe!
+//use the arrow keys to move the logo
 
 let x = 100;
 let y = 100;
@@ -17,7 +19,6 @@ let newShoe;
 let dx, dy;
 let px, py;
 let shoeWidth, shoeHeight;
-let shoeSwitch;
 let points;
 
 function preload() {
@@ -53,7 +54,6 @@ function draw() {
   imageMode(CORNER);
   image(backgroundImage, 0, 0, width, height);
   imageMode(CENTER);
-  shoeSwitch;
   console.log(points);
   //display the logo
   if (whichImage === "adidas") {
@@ -85,14 +85,17 @@ function draw() {
   if (newShoe === "pumaShoe") {
     imageScalar = 0.2;
     image(pumaShoe, shoeX, shoeY, pumaShoe.width * imageScalar, pumaShoe.height * imageScalar);
+    shoeTouching();
   }
   if (newShoe === "nikeShoe") {
     imageScalar = 0.45;
     image(nikeShoe, shoeX, shoeY, nikeShoe.width * imageScalar, nikeShoe.height * imageScalar)
+    shoeTouching();
   }
   if (newShoe === "adidasShoe") {
     imageScalar = 0.2;
     image(adidasShoe, shoeX, shoeY, adidasShoe.width * imageScalar, adidasShoe.height * imageScalar)
+    shoeTouching();
   }
   //move the shoe
   shoeX += px;
@@ -106,32 +109,39 @@ function draw() {
   if (shoeY >= height || shoeY <=0) {
     py = -1 * py;
   }
+}
+//see if the shoe is touching the logo  
+function shoeTouching(){
+    if (Math.abs(shoeX - x) <= 100 && Math.abs(shoeY-y) <= 100)
+    shoeSwitch();
 
-  //switch the shoe depending on the contact
+  //switch the shoe if the shoe touches the logo
   function shoeSwitch(){
-    if (newShoe === "pumaShoe" && whichImage === "puma" &&
-    (shoeX >= x && shoeY >= y)) {
+    if (newShoe === "pumaShoe" && whichImage === "puma") {
       points += 1;
       newShoe = random(whichShoe);
+      shoeX = random(0, 650);
+      shoeY = random(0, 650);
     }
-    else if (newShoe === "nikeShoe" && whichImage === "nike" &&
-    (shoeX >= x && shoeY >= y)) {
+    else if (newShoe === "nikeShoe" && whichImage === "nike") {
       points += 1;
       newShoe = random(whichShoe);
+      shoeX = random(0, 650);
+      shoeY = random(0, 650);
     }
-    else if (newShoe === "adidasShoe" && whichImage === "adidas" &&
-    (shoeX >= x && shoeY >= y)) {
+    else if (newShoe === "adidasShoe" && whichImage === "adidas") {
       points += 1;
       newShoe = random(whichShoe);
+      shoeX = random(0, 650);
+      shoeY = random(0, 650);
     }
-    else if (shoeX >= x && shoeY >= y){
+    else {
       points = 0;
       newShoe = random(whichShoe);
     }
     py = random(2,10);
     px = random(2,10);
   }
-
   }
 function keyPressed(){
   //change the logo
