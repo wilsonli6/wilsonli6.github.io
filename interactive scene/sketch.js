@@ -30,14 +30,14 @@ function preload() {
   nikeShoe = loadImage("assets/nikeShoe.png");
 }
 function setup() {
-  whichImage = "adidas";
-  whichShoe = ["adidasShoe", "pumaShoe", "nikeShoe"];
-  newShoe = random(whichShoe);
-  newShoe;
   createCanvas(650,650);
   backgroundImage = loadImage("assets/sneaker.png");
   scalar = 0.1;
   //choose the first image to appear
+  whichImage = "adidas";
+  whichShoe = ["adidasShoe", "pumaShoe", "nikeShoe"];
+  newShoe = random(whichShoe);
+  newShoe;
   imageScalar = 0.2;
   shoeX = width/2;
   shoeY = height/2;
