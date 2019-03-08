@@ -11,6 +11,7 @@ let buttonX, buttonY, buttonWidth, buttonHeight;
 let buttonScalar;
 
 function preload() {
+  //load images
   soccerBall = loadImage("assets/soccerBall.png");
   playButton = loadImage("assets/playButton.png");
 }
@@ -21,6 +22,8 @@ function setup() {
   state = "startScreen";
   buttonX = width/2;
   buttonY = height/2;
+  buttonHeight = 250;
+  buttonWidth = 125;
 }
 
 function draw() {
