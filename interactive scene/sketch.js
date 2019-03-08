@@ -116,6 +116,7 @@ function draw() {
     py = -1 * py;
   }
 }
+
 function mousePressed(){
   if (song.isPlaying()){
     song.stop();
@@ -124,7 +125,6 @@ function mousePressed(){
     song.play();
   }
 }
-
 
 //see if the shoe is touching the logo  
 function shoeTouching(){
