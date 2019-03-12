@@ -9,6 +9,8 @@
 //use the arrow keys to move the logo
 //for music click the mouse
 
+let adidas, nike, puma;
+let adidasShoe, nikeShoe, pumaShoe;
 let x = 100;
 let y = 100;
 let shoeX, shoeY;
