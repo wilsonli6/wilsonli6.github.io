@@ -12,4 +12,9 @@ function setup() {
 
 function draw() {
   background(220);
+  let (x = 30; x < windowHeight; x += 30){
+    let (y = 30; y < windowHeight; y +=30){
+      
+    }
+  }
 }
