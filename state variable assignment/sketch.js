@@ -4,6 +4,7 @@
 //Soccer Ball assignment
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
+//nature of code dot com vectors
 let soccerBall;
 let soccerNet;
 let state;
@@ -30,24 +31,24 @@ function setup() {
 
   //determine start screen measurements
   state = "startScreen";
-  buttonScalar = 0.3;
+  //buttonScalar = 0.3;
   buttonX = width/2;
   buttonY = height/2;
-  buttonHeight = windowHeight/4;
+  buttonHeight = windowHeight/3.5;
   buttonWidth = windowWidth/5;
 
   //soccer ball measurements
-  soccerBallScalar = 0.4;
-  soccerBallRadius = windowHeight/10;
+  //soccerBallScalar = 0.4;
+  soccerBallRadius = windowHeight/15;
   soccerBallHeight = soccerBallRadius *2;
   soccerBallWidth = soccerBallRadius *2;
   soccerBallX = 0 + soccerBallRadius;
   soccerBallY = height - soccerBallRadius;
 
   //soccer net measurements
-  soccerNetScalar = 2.5;
-  soccerNetHeight = windowHeight/4;
-  soccerNetWidth = windowWidth/8;
+  soccerNetScalar = 10;
+  soccerNetHeight = windowHeight/1.2;
+  soccerNetWidth = windowWidth/6;
   soccerNetX = width - soccerNetWidth/2;
   soccerNetY = height - soccerNetHeight/2;
 }
