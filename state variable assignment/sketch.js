@@ -5,6 +5,7 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 //nature of code dot com vectors
+let player;
 let soccerBall;
 let soccerNet;
 let state;
@@ -23,12 +24,18 @@ function preload() {
   soccerBall = loadImage("assets/soccerBall.png");
   playButton = loadImage("assets/playButton.png");
   soccerNet = loadImage("assets/net.png");
+  player = {
+    kickingLeft: loadImage("assets/kickingLeft.png"),
+    kickingRight: loadImage("assets/kickingRight.png"),
+    facingLeft: loadImage("assets/standing.png"),
+    facingRight: loadImage("assets/standing.png")
+  };
+
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  backgroundImage = ("assets/field.png");
-
+  backgroundImage = loadImage("assets/field.png");
   //determine start screen measurements
   state = "startScreen";
   //buttonScalar = 0.3;
@@ -59,10 +66,12 @@ function draw() {
     displayMenu();
   }
   if (state === "playSoccer"){
+    imageMode(CORNER);
+    image(backgroundImage, 0, 0, windowWidth, windowHeight);
+
     displayBall();
     displayNet();
-    imageMode(CORNER);
-    image(backgroundImage, 0, 0, width, height);
+    displayPlayer();
   }
 }
 
@@ -86,9 +95,16 @@ function displayMenu() {
 }
 
 function displayBall() {
+  imageMode(CENTER);
   image(soccerBall, soccerBallX, soccerBallY, soccerBallWidth, soccerBallHeight);
 }
 
 function displayNet() {
+  imageMode(CENTER);
   image(soccerNet, soccerNetX, soccerNetY, soccerNetWidth, soccerNetHeight);
+}
+
+function displayPlayer() {
+  imageMode(CENTER);
+  image(player.facingRight, windowWidth)
 }
