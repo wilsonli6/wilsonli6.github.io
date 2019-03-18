@@ -5,18 +5,13 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 //nature of code dot com vectors
-let player;
-let soccerBall;
-let soccerNet;
+
+let player, playerHeight, playerWidth, playerX, playerY;
 let state;
 let playButton;
-let buttonX, buttonY, buttonWidth, buttonHeight;
-let buttonScalar;
-let soccerBallX, soccerBallY, soccerBallWidth, soccerBallHeight;
-let soccerBallScalar;
-let soccerBallRadius;
-let soccerNetX, soccerNetY, soccerNetWidth, soccerNetHeight;
-let soccerNetScalar;
+let buttonX, buttonY, buttonWidth, buttonHeight, buttonScalar;
+let soccerBall, soccerBallX, soccerBallY, soccerBallWidth, soccerBallHeight, soccerBallScalar, soccerBallRadius;
+let soccerNet, soccerNetX, soccerNetY, soccerNetWidth, soccerNetHeight, soccerNetScalar;
 let backgroundImage;
 
 function preload() {
@@ -58,6 +53,12 @@ function setup() {
   soccerNetWidth = windowWidth/6;
   soccerNetX = width - soccerNetWidth/2;
   soccerNetY = height - soccerNetHeight/2;
+
+  //player measurements
+  playerHeight = windowHeight/3;
+  playerWidth = windowWidth/8;
+  playerX = width - playerWidth*7;
+  playerY = height - playerHeight/2;
 }
 
 function draw() {
@@ -72,6 +73,7 @@ function draw() {
     displayBall();
     displayNet();
     displayPlayer();
+    movePlayer();
   }
 }
 
@@ -106,5 +108,18 @@ function displayNet() {
 
 function displayPlayer() {
   imageMode(CENTER);
-  image(player.facingRight, windowWidth)
+  image(player.facingRight, playerX, playerY, playerWidth, playerHeight);
+}
+function movePlayer() {
+  if (keyIsDown(LEFT_ARROW)) {
+    playerX -= 5;
+  }
+
+  if (keyIsDown(RIGHT_ARROW)) {
+    playerX += 5;
+  }
+  //if the spacebar is pressed
+  if (keyIsDown(32) && player.facingRight) {
+    image(player.kickingRight, playerX, playerY, playerWidth, playerHeight);
+  }
 }
