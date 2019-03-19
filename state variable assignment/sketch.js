@@ -6,7 +6,7 @@
 // - describe what you did to take this project "above and beyond"
 //nature of code dot com vectors
 
-let player, playerHeight, playerWidth, playerX, playerY;
+let player, playerHeight, playerWidth, playerX, playerY, playerImage;
 let state;
 let playButton;
 let buttonX, buttonY, buttonWidth, buttonHeight, buttonScalar;
@@ -60,7 +60,8 @@ function setup() {
   playerWidth = windowWidth/8;
   playerX = width - playerWidth*7;
   playerY = height - playerHeight/2;
-  directionOfMovement = "right";
+  directionOfMovement = "right"; 
+  playerImage = player.facingLeft;
 }
 
 function draw() {
@@ -109,7 +110,7 @@ function displayNet() {
 
 function displayPlayer() {
   imageMode(CENTER);
-  image(player.facingRight, playerX, playerY, playerWidth, playerHeight);
+  image(playerImage, playerX, playerY, playerWidth, playerHeight);
 }
 function movePlayer() {
   if (keyIsDown(LEFT_ARROW)) {
@@ -123,9 +124,11 @@ function movePlayer() {
   }
   //if the spacebar is pressed
   if (keyIsDown(32) && directionOfMovement === "right") {
-    image(player.kickingRight, playerX, playerY, playerWidth, playerHeight);
+    playerImage = player.kickingRight;
+    //image(player.kickingRight, playerX, playerY, playerWidth, playerHeight);
   }
   else if (keyIsDown(32) && directionOfMovement === "left") {
-    image(player.kickingLeft, playerX, playerY, playerWidth, playerHeight);
+    playerImage = player.kickingLeft;
+    // image(player.kickingLeft, playerX, playerY, playerWidth, playerHeight);
   }
 }
