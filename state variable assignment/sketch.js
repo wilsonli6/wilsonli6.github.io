@@ -13,6 +13,7 @@ let buttonX, buttonY, buttonWidth, buttonHeight, buttonScalar;
 let soccerBall, soccerBallX, soccerBallY, soccerBallWidth, soccerBallHeight, soccerBallScalar, soccerBallRadius;
 let soccerNet, soccerNetX, soccerNetY, soccerNetWidth, soccerNetHeight, soccerNetScalar;
 let backgroundImage;
+let directionOfMovement;
 
 function preload() {
   //load images
@@ -20,8 +21,8 @@ function preload() {
   playButton = loadImage("assets/playButton.png");
   soccerNet = loadImage("assets/net.png");
   player = {
-    kickingLeft: loadImage("assets/kickingLeft.png"),
-    kickingRight: loadImage("assets/kickingRight.png"),
+    kickingRight: loadImage("assets/kickingLeft.png"),
+    kickingLeft: loadImage("assets/kickingRight.png"),
     facingLeft: loadImage("assets/standing.png"),
     facingRight: loadImage("assets/standing.png")
   };
@@ -59,6 +60,7 @@ function setup() {
   playerWidth = windowWidth/8;
   playerX = width - playerWidth*7;
   playerY = height - playerHeight/2;
+  directionOfMovement = "right";
 }
 
 function draw() {
@@ -69,10 +71,9 @@ function draw() {
   if (state === "playSoccer"){
     imageMode(CORNER);
     image(backgroundImage, 0, 0, windowWidth, windowHeight);
-
+    displayPlayer();
     displayBall();
     displayNet();
-    displayPlayer();
     movePlayer();
   }
 }
@@ -113,13 +114,18 @@ function displayPlayer() {
 function movePlayer() {
   if (keyIsDown(LEFT_ARROW)) {
     playerX -= 5;
+    directionOfMovement = "left";
   }
 
   if (keyIsDown(RIGHT_ARROW)) {
     playerX += 5;
+    directionOfMovement = "right";
   }
   //if the spacebar is pressed
-  if (keyIsDown(32) && player.facingRight) {
+  if (keyIsDown(32) && directionOfMovement === "right") {
     image(player.kickingRight, playerX, playerY, playerWidth, playerHeight);
+  }
+  else if (keyIsDown(32) && directionOfMovement === "left") {
+    image(player.kickingLeft, playerX, playerY, playerWidth, playerHeight);
   }
 }
