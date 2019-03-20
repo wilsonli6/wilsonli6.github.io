@@ -11,6 +11,7 @@ let state;
 let playButton;
 let buttonX, buttonY, buttonWidth, buttonHeight, buttonScalar;
 let soccerBall, soccerBallX, soccerBallY, soccerBallWidth, soccerBallHeight, soccerBallScalar, soccerBallRadius;
+let soccerBallSpeedX, soccerBallSpeedY;
 let soccerNet, soccerNetX, soccerNetY, soccerNetWidth, soccerNetHeight, soccerNetScalar;
 let backgroundImage;
 let directionOfMovement;
@@ -47,6 +48,8 @@ function setup() {
   soccerBallWidth = soccerBallRadius *2;
   soccerBallX = 0 + soccerBallRadius;
   soccerBallY = height - soccerBallRadius;
+  soccerBallSpeedX = 0;
+  soccerBallSpeedY = 0;
 
   //soccer net measurements
   soccerNetScalar = 10;
@@ -76,6 +79,8 @@ function draw() {
     displayBall();
     displayNet();
     movePlayer();
+    animatePlayer();
+    ballIsKicked();
   }
 }
 
@@ -112,23 +117,48 @@ function displayPlayer() {
   imageMode(CENTER);
   image(playerImage, playerX, playerY, playerWidth, playerHeight);
 }
+
 function movePlayer() {
   if (keyIsDown(LEFT_ARROW)) {
     playerX -= 5;
     directionOfMovement = "left";
+    playerImage = player.facingLeft;
   }
 
   if (keyIsDown(RIGHT_ARROW)) {
     playerX += 5;
     directionOfMovement = "right";
+    playerImage = player.facingRight;
   }
+}
+
+function stopKicking() {
+  if (directionOfMovement === "left") {
+    playerImage = player.facingLeft;
+  }
+  else if (directionOfMovement === "right") {
+    playerImage = player.facingRight;
+  }
+}
+
+function animatePlayer() {
   //if the spacebar is pressed
   if (keyIsDown(32) && directionOfMovement === "right") {
     playerImage = player.kickingRight;
+    setTimeout(stopKicking, 100);
     //image(player.kickingRight, playerX, playerY, playerWidth, playerHeight);
   }
   else if (keyIsDown(32) && directionOfMovement === "left") {
     playerImage = player.kickingLeft;
+    setTimeout(stopKicking, 100);
     // image(player.kickingLeft, playerX, playerY, playerWidth, playerHeight);
+  }
+} 
+
+function ballIsKicked() {
+  if (Math.abs(playerX - soccerBallX) <= 50 && Math.abs(playerY - soccerBallY) <= 50 || playerImage === player.kickingRight) {
+    soccerBallSpeedX = 5;
+    soccerBallX += soccerBallSpeedX;
+    soccerBallY += soccerBallSpeedY;
   }
 }
