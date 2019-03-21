@@ -15,6 +15,7 @@ let soccerBallSpeedX, soccerBallSpeedY;
 let soccerNet, soccerNetX, soccerNetY, soccerNetWidth, soccerNetHeight, soccerNetScalar;
 let backgroundImage;
 let directionOfMovement;
+let gravity, bounce, friction, velocityX, velocityY;
 
 function preload() {
   //load images
@@ -50,6 +51,9 @@ function setup() {
   soccerBallY = height - soccerBallRadius;
   soccerBallSpeedX = 0;
   soccerBallSpeedY = 0;
+  gravity = 0.5;
+  bounce = 0.7;
+  friction = 0.1;
 
   //soccer net measurements
   soccerNetScalar = 10;
@@ -156,8 +160,13 @@ function animatePlayer() {
 } 
 
 function ballIsKicked() {
-  if (Math.abs(playerX - soccerBallX) <= 50 && Math.abs(playerY - soccerBallY) <= 50 || playerImage === player.kickingRight) {
+  if (playerImage === player.kickingRight && Math.abs(playerX - soccerBallX) <= 126 && playerX - soccerBallX <= 50){
     soccerBallSpeedX = 5;
+    soccerBallX += soccerBallSpeedX;
+    soccerBallY += soccerBallSpeedY;
+  }
+  if (playerImage === player.kickingLeft && Math.abs(playerX - soccerBallX) <= 126 && playerX - soccerBallX >=-50) {
+    soccerBallSpeedX = -5;
     soccerBallX += soccerBallSpeedX;
     soccerBallY += soccerBallSpeedY;
   }
