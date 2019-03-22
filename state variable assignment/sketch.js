@@ -163,11 +163,26 @@ function ballIsKicked() {
   if (playerImage === player.kickingRight && Math.abs(playerX - soccerBallX) <= 126 && playerX - soccerBallX <= 50){
     soccerBallSpeedX = 5;
     soccerBallX += soccerBallSpeedX;
-    soccerBallY += soccerBallSpeedY;
+    // soccerBallY += soccerBallSpeedY;
+    ballGravity();
   }
-  if (playerImage === player.kickingLeft && Math.abs(playerX - soccerBallX) <= 126 && playerX - soccerBallX >=-50) {
-    soccerBallSpeedX = -5;
-    soccerBallX += soccerBallSpeedX;
-    soccerBallY += soccerBallSpeedY;
+}
+if (playerImage === player.kickingLeft && Math.abs(playerX - soccerBallX) <= 126 && playerX - soccerBallX >=-50) {
+  soccerBallSpeedX = -5;
+  soccerBallX += soccerBallSpeedX;
+  ballGravity();
+}
+
+function ballGravity() {
+  soccerBallY += bounce;
+  bounce += gravity;
+  if (soccerBallY > height) {
+    // Multiplying by -0.95 instead of -1 slows the square 
+    // down each time it bounces (by decreasing speed).  
+    // This is known as a "dampening" effect and is a more 
+    // realistic simulation of the real world (without it, 
+    // a ball would bounce forever).
+    bounce = bounce * -0.95;
+    soccerBallY = height;
   }
 }
