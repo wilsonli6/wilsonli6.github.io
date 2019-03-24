@@ -35,6 +35,7 @@ function preload() {
   //load song
   song = loadSound("assets/300 Violin Orchestra - Jorge Quintero (High Quality).mp3");
 }
+
 function setup() {
   createCanvas(650,650);
   backgroundImage = loadImage("assets/sneaker.png");
