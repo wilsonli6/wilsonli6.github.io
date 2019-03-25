@@ -12,6 +12,6 @@ function draw() {
   translate(width/2, height/2);
   ellipse(0,0, width/3, width/3);
   ellipse(0, 0, 1, 1);
-  rect(width/3, height/3, 70, 70)
-  pop();;
+  rect(width/12, height/12, 30, 70)
+  pop();
 }
