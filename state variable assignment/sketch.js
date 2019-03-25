@@ -89,6 +89,9 @@ function draw() {
     ballIsKicked();
     ballGravity();
     boundaries();
+
+    //testing
+    line(0.95*width, 0, 0.95*width, -0.3*height-0.95*height);
   }
 }
 
