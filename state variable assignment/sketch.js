@@ -225,7 +225,7 @@ function boundaries() {
   if (soccerBallX >= soccerNetX && soccerBallY > 20){
     xVelocity = 0;
   }
-  if (soccerBallX >= soccerNetX && soccerBallY < 20) {
+  if (soccerBallX >= soccerNetX && soccerNetHeight - soccerBallY) {
     yVelocity = yVelocity * -0.95;
     xVelocity = -4;
   }
