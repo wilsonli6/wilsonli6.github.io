@@ -91,7 +91,7 @@ function draw() {
     boundaries();
 
     //testing
-    line(0.95*width, 0, 0.95*width, -0.3*height-0.95*height);
+    line(0.95*width, 0, 0.95*width, height);
   }
 }
 
