@@ -4,8 +4,8 @@
 //Soccer Ball Assignment
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
-//nature of code dot com vectors
-
+//with the help of Mr. Schellenberg, I was able to create a gravity-like feel for the ball. I also had to figure out how to make simple animations for my character when it kicks the ball.
+//the dimensions for the net were also kind of hard... so there's that
 let player, playerHeight, playerWidth, playerX, playerY, playerImage;
 let state;
 let playButton;
@@ -22,13 +22,13 @@ function preload() {
   soccerBall = loadImage("assets/soccerBall.png");
   playButton = loadImage("assets/playButton.png");
   soccerNet = loadImage("assets/net.png");
+  // I organized the player into one object to make it easier to manage
   player = {
     kickingRight: loadImage("assets/kickingLeft.png"),
     kickingLeft: loadImage("assets/kickingRight.png"),
     facingLeft: loadImage("assets/standing.png"),
     facingRight: loadImage("assets/standing.png")
   };
-
 }
 
 function setup() {
@@ -43,7 +43,6 @@ function setup() {
   buttonWidth = windowWidth/5;
 
   //soccer ball measurements
-  //soccerBallScalar = 0.4;
   soccerBallRadius = windowHeight/15;
   soccerBallHeight = soccerBallRadius *2;
   soccerBallWidth = soccerBallRadius *2;
@@ -77,6 +76,10 @@ function draw() {
   background(220);
   if (state === "startScreen") {
     displayMenu();
+    playerX = width - playerWidth*7;
+    playerY = height - playerHeight/2;
+    soccerBallX = 0 + soccerBallRadius;
+    soccerBallY = ground;
   }
   if (state === "playSoccer"){
     imageMode(CORNER);
@@ -89,11 +92,14 @@ function draw() {
     ballIsKicked();
     ballGravity();
     boundaries();
-
-    //testing
-    line(0.95*width, 0, 0.95*width, height);
+    goalScored();
   }
 }
+
+// Eventually, I want to display a 'congratulations' when you score, but I tried to do that and it didn't work for some reason. Hence, I decided to leave it out for now.
+// if (state === "celebration") {
+//   displayCongrats();
+// }
 
 function mousePressed() {
   if (state === "startScreen") {
@@ -166,7 +172,7 @@ function animatePlayer() {
 
 function ballIsKicked() {
   if (playerImage === player.kickingRight && Math.abs(playerX - soccerBallX) <= 126 && playerX - soccerBallX <= 50
-  && Math.abs(playerY - soccerBallY) <=90){
+  && Math.abs(playerY - soccerBallY) <= 90){
     soccerBallSpeedX = 20;
     soccerBallX += soccerBallSpeedX;
     acceleration = -5;
@@ -175,7 +181,7 @@ function ballIsKicked() {
     }
   }
   if (playerImage === player.kickingLeft && Math.abs(playerX - soccerBallX) <= 126 && playerX - soccerBallX >=-50
-  && Math.abs(playerY - soccerBallY) <=90) {
+  && Math.abs(playerY - soccerBallY) <= 90) {
     soccerBallSpeedX = -20;
     soccerBallX += soccerBallSpeedX;
     acceleration = -2;
@@ -217,6 +223,7 @@ function boundaries() {
   if (soccerBallY < (0 + soccerBallHeight/2)) {
     yVelocity = yVelocity * -1;
   }
+  
   //so the player can't leave the screen
   if (playerX > width) {
     playerX = width;
@@ -224,12 +231,21 @@ function boundaries() {
   if (playerX < 0) {
     playerX = 0 - playerX/2;
   }
+
   //net boundaries
-  if (soccerBallX >= soccerNetX && soccerBallY > 20){
+  if (Math.abs(soccerBallX - soccerNetX) <= 20){
     xVelocity = 0;
   }
-  if (soccerBallX >= soccerNetX && soccerNetHeight - soccerBallY) {
-    yVelocity = yVelocity * -0.95;
-    xVelocity = -4;
+   
+  if (Math.abs(soccerBallX - soccerNetX) <= 20 && soccerBallY < height/4){
+    xVelocity = -5;
+    yVelocity = yVelocity *-1;
+
+  }
+}
+
+function goalScored() {
+  if (Math.abs(soccerBallX - soccerNetX) <= 40 && soccerBallY > height/4){
+    state = "startScreen";
   }
 }
