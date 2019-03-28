@@ -1,41 +1,60 @@
-// Perlin Noise
-// Wilson Li
-// 3/27/19
+// Perlin Noise Demo
 
-let numberOfRects;
 let time;
 let rectWidth;
+let numberOfRects;
 let rects = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   numberOfRects = width;
   time = 0;
-  rectWidth = width/numberOfRects;
+  rectWidth = width / numberOfRects;
   generateInitialTerrain();
 }
 
 function draw() {
   background(220);
   fill(0);
-  for (let i = 0; i < numberOfRects; i++) {
-    rect(rects[i].x, rects[i].y, rects[i].width, rect[i].height);
+
+  //remove leftmost rectangle
+  rects.shift();
+  //add rectangle on right
+  let rectHeight = noise(time) * height;
+  let myRectangle = {
+    height: rectHeight,
+    width: rectWidth,
+    x: width - rectWidth,
+    y: height - rectHeight,
+  };
+  rects.push(myRectangle);
+
+  // move along the perlin noise x-axis
+  time += 0.001;
+
+
+  // displaying the terrain
+  for (let i = 0; i < rects.length; i ++) {
+    // move rectangle to the left
+    rects[i].x -= rectWidth;
+    rect(rects[i].x, rects[i].y, rects[i].width, rects[i].height);
   }
+  
 }
 
 function generateInitialTerrain() {
-  for (let i = 0; i < numberOfRects; i++){
+  for (let i = 0; i < numberOfRects; i++) {
     let rectHeight = noise(time) * height;
     let myRectangle = {
       height: rectHeight,
       width: rectWidth,
       x: i * rectWidth,
-      y: height - rectHeight
+      y: height - rectHeight,
     };
     rects.push(myRectangle);
 
-
     // move along the perlin noise x-axis
-    time += 0.01;
+    time += 0.001;
   }
+  
 }
