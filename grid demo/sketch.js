@@ -5,6 +5,7 @@
 let gridSize = 50;
 let grid;
 let cellSize;
+let autoPlay;
 
 function setup() {
   if (windowWidth > windowHeight) {
@@ -106,11 +107,29 @@ function update() {
 
 function keyPressed() {
   if (key === " ") {
+    window.clearInterval(autoPlay);
     update();
   }
-  if (key === "r") {
+  if (key === "c") {
     grid = create2DArray(gridSize,gridSize);
   }
+  if (key === "r") {
+    grid = createRandom2DArray(gridSize,gridSize);
+  }
+  if (key === "a") {
+    autoPlay = window.setInterval(update, 50);
+  }
+  if (key === "s") {
+    saveJSON(grid, "thegrid.json");
+  }
+  if (key === "g") {
+    noLoop();
+    grid = loadJSON("assets/gosper.json", loadingComplete);
+  }
+}
+
+function loadingComplete() {
+  loop();
 }
 
 function mousePressed() {
