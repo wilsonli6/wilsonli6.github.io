@@ -13,15 +13,14 @@ let autoPlay;
 
 function setup() {
   // translate(width/2, height/2);
-  createCanvas(windowHeight, windowWidth);
+  createCanvas(windowWidth, windowHeight);
   cellSize = 150;
 }
 
 function draw() {
   translate(500, 200);
-  background(255);
+  background(225);
   displayGrid();
-  ellipse(500, 50, 50, 50);
 }
 
 function displayGrid() {
