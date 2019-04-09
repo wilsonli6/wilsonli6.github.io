@@ -7,18 +7,20 @@
 
 
 let gridSize = 2;
-let grid;
 let cellSize;
-let autoPlay;
+let xOffset;
+let yOffset;
 
 function setup() {
   // translate(width/2, height/2);
   createCanvas(windowWidth, windowHeight);
   cellSize = 150;
+  xOffset = width/2.5;
+  yOffset = height/3;
 }
 
 function draw() {
-  translate(500, 200);
+  translate(xOffset, yOffset);
   background(225);
   displayGrid();
 }
@@ -32,7 +34,8 @@ function displayGrid() {
 }
 
 
-//function mousePressed() {
-//   let xcoord = floor(mouseX/cellSize);
-//   let ycoord = floor(mouseY/cellSize);
-// }
+function mousePressed() {
+  let xcoord = floor((mouseX-xOffset)/cellSize);
+  let ycoord = floor((mouseY-yOffset)/cellSize);
+  console.log(xcoord, ycoord);
+}

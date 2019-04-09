@@ -76,12 +76,14 @@ function draw() {
   background(220);
   if (state === "startScreen") {
     displayMenu();
+    checkCursor();
     playerX = width - playerWidth*7;
     playerY = height - playerHeight/2;
     soccerBallX = 0 + soccerBallRadius;
     soccerBallY = ground;
   }
   if (state === "playSoccer"){
+    noCursor();
     imageMode(CORNER);
     image(backgroundImage, 0, 0, windowWidth, windowHeight);
     displayPlayer();
@@ -112,7 +114,19 @@ function clickedOnButton(x, y) {
   return x >= buttonX - buttonWidth/2 &&
 				 x <= buttonX + buttonWidth/2 &&
 				 y >= buttonY - buttonHeight/2 &&
-				 y <= buttonY + buttonHeight/2;
+         y <= buttonY + buttonHeight/2;
+}
+
+function checkCursor() {
+  if (mouseX >= buttonX - buttonWidth/2 &&
+    mouseX <= buttonX + buttonWidth/2 &&
+    mouseY >= buttonY - buttonHeight/2 &&
+    mouseY <= buttonY + buttonHeight/2) {
+      cursor("pointer");
+    }
+    else {
+      cursor(ARROW);
+    }
 }
 
 function displayMenu() {
