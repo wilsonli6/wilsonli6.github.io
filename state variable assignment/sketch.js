@@ -118,15 +118,15 @@ function clickedOnButton(x, y) {
 }
 
 function checkCursor() {
-  if (mouseX >= buttonX - buttonWidth/2 &&
-    mouseX <= buttonX + buttonWidth/2 &&
-    mouseY >= buttonY - buttonHeight/2 &&
-    mouseY <= buttonY + buttonHeight/2) {
-      cursor("pointer");
-    }
-    else {
-      cursor(ARROW);
-    }
+  if (mouseX >= buttonX &&
+    mouseX <= buttonWidth &&
+    mouseY >= buttonY &&
+    mouseY <= buttonHeight) {
+    cursor("pointer");
+  }
+  else {
+    cursor(ARROW);
+  }
 }
 
 function displayMenu() {
