@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 // States Variable Assignment
 // Wilson Li
 // March 25th, 2019
