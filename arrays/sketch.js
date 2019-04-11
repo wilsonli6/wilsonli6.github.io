@@ -10,6 +10,16 @@ let gridSize = 2;
 let cellSize;
 let xOffset;
 let yOffset;
+let fastAbility, tallAbility, strongAbility, shootingAbility;
+let xcoord, ycoord;
+
+function preload() {
+  //load images
+  fastAbility = loadImage("assets/fast.png");
+  tallAbility = loadImage("assets/tall.png");
+  strongAbility = loadImage("assets/strong.png");
+  shootingAbility = loadImage("assets/shoot.png");
+}
 
 function setup() {
   // translate(width/2, height/2);
@@ -21,8 +31,11 @@ function setup() {
 
 function draw() {
   translate(xOffset, yOffset);
+  xcoord = floor((mouseX-xOffset)/cellSize);
+  ycoord = floor((mouseY-yOffset)/cellSize);
   background(225);
   displayGrid();
+  checkCursor();
 }
 
 function displayGrid() {
@@ -38,4 +51,13 @@ function mousePressed() {
   let xcoord = floor((mouseX-xOffset)/cellSize);
   let ycoord = floor((mouseY-yOffset)/cellSize);
   console.log(xcoord, ycoord);
+}
+
+function checkCursor() {
+  if (xcoord >= 0 && xcoord <= 1 && ycoord >= 0 && ycoord <= 1) {
+    cursor("pointer");
+  }
+  else {
+    cursor(ARROW);
+  }
 }
