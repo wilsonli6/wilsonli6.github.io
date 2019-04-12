@@ -12,6 +12,7 @@ let xOffset;
 let yOffset;
 let fastAbility, tallAbility, strongAbility, shootingAbility;
 let xcoord, ycoord;
+let cellPictureHeight, cellPictureWidth;
 
 function preload() {
   //load images
@@ -27,6 +28,8 @@ function setup() {
   cellSize = 150;
   xOffset = width/2.5;
   yOffset = height/3;
+  cellPictureWidth = cellSize;
+  cellPictureHeight = cellSize;
 }
 
 function draw() {
@@ -36,6 +39,10 @@ function draw() {
   background(225);
   displayGrid();
   checkCursor();
+  imageMode(CORNER);
+  image(fastAbility, xOffset/cellSize, yOffset/cellSize, cellPictureWidth, cellPictureHeight);
+  image(tallAbility, xOffset-cellSize*3.25, yOffset/cellSize, cellPictureWidth, cellPictureHeight);
+  image(strongAbility, xOffset/cellSize, yOffset-cellSize*0.6, cellPictureWidth/1.3, cellPictureHeight/1.3);
 }
 
 function displayGrid() {
