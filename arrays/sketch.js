@@ -40,9 +40,10 @@ function draw() {
   displayGrid();
   checkCursor();
   imageMode(CORNER);
-  image(fastAbility, xOffset/cellSize, yOffset/cellSize, cellPictureWidth, cellPictureHeight);
-  image(tallAbility, xOffset-cellSize*3.25, yOffset/cellSize, cellPictureWidth, cellPictureHeight);
-  image(strongAbility, xOffset/cellSize, yOffset-cellSize*0.6, cellPictureWidth/1.3, cellPictureHeight/1.3);
+  image(fastAbility, 0, 0, cellPictureWidth, cellPictureHeight);
+  image(tallAbility, 1*cellSize, 1*cellSize, cellPictureWidth, cellPictureHeight);
+  image(strongAbility, 1*cellSize, 0, cellPictureWidth, cellPictureHeight);
+  image(shootingAbility, 0, 1*cellSize, cellPictureWidth, cellPictureHeight);
 }
 
 function displayGrid() {
@@ -58,6 +59,9 @@ function mousePressed() {
   let xcoord = floor((mouseX-xOffset)/cellSize);
   let ycoord = floor((mouseY-yOffset)/cellSize);
   console.log(xcoord, ycoord);
+  if (xcoord === 0 && ycoord === 0) {
+    chooseFast();
+  }
 }
 
 function checkCursor() {
