@@ -25,6 +25,8 @@ function preload() {
 function setup() {
   // translate(width/2, height/2);
   createCanvas(windowWidth, windowHeight);
+  backgroundImage = loadImage("assets/stadium.png");
+  txt = "🔥Select Your Ability🔥";
   cellSize = 150;
   xOffset = width/2.5;
   yOffset = height/3;
@@ -33,12 +35,14 @@ function setup() {
 }
 
 function draw() {
+  background(225);
+  checkCursor();
+  image(backgroundImage, 0, 0, width, height);
+  displayText();
   translate(xOffset, yOffset);
+  displayGrid();
   xcoord = floor((mouseX-xOffset)/cellSize);
   ycoord = floor((mouseY-yOffset)/cellSize);
-  background(225);
-  displayGrid();
-  checkCursor();
   imageMode(CORNER);
   image(fastAbility, 0, 0, cellPictureWidth, cellPictureHeight);
   image(tallAbility, 1*cellSize, 1*cellSize, cellPictureWidth, cellPictureHeight);
@@ -71,4 +75,9 @@ function checkCursor() {
   else {
     cursor(ARROW);
   }
+}
+
+function displayText() {
+  textSize(40);
+  text(txt, width/2.7, height/5);
 }
