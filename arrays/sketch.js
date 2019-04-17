@@ -13,6 +13,8 @@ let yOffset;
 let fastAbility, tallAbility, strongAbility, shootingAbility;
 let xcoord, ycoord;
 let cellPictureHeight, cellPictureWidth;
+let txt;
+let backgroundImage;
 
 function preload() {
   //load images
@@ -23,7 +25,6 @@ function preload() {
 }
 
 function setup() {
-  // translate(width/2, height/2);
   createCanvas(windowWidth, windowHeight);
   backgroundImage = loadImage("assets/stadium.png");
   txt = "🔥Select Your Ability🔥";
