@@ -15,6 +15,7 @@ let xcoord, ycoord;
 let cellPictureHeight, cellPictureWidth;
 let txt;
 let backgroundImage;
+let state;
 
 function preload() {
   //load images
@@ -27,6 +28,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   backgroundImage = loadImage("assets/stadium.png");
+  state === "nothing";
   txt = "🔥Select Your Ability🔥";
   cellSize = 150;
   xOffset = width/2.5;
@@ -37,18 +39,26 @@ function setup() {
 
 function draw() {
   background(225);
-  checkCursor();
-  image(backgroundImage, 0, 0, width, height);
-  displayText();
-  translate(xOffset, yOffset);
-  displayGrid();
   xcoord = floor((mouseX-xOffset)/cellSize);
   ycoord = floor((mouseY-yOffset)/cellSize);
-  imageMode(CORNER);
-  image(fastAbility, 0, 0, cellPictureWidth, cellPictureHeight);
-  image(tallAbility, 1*cellSize, 1*cellSize, cellPictureWidth, cellPictureHeight);
-  image(strongAbility, 1*cellSize, 0, cellPictureWidth, cellPictureHeight);
-  image(shootingAbility, 0, 1*cellSize, cellPictureWidth, cellPictureHeight);
+  // if (state === "choice") {
+    checkCursor();
+    image(backgroundImage, 0, 0, width, height);
+    displayText();
+    translate(xOffset, yOffset);
+    displayGrid();
+    displayAbilities();
+  // }
+    // checkCursor();
+    // image(backgroundImage, 0, 0, width, height);
+    // displayText();
+    // translate(xOffset, yOffset);
+    // displayGrid();
+    // imageMode(CORNER);
+    // image(fastAbility, 0, 0, cellPictureWidth, cellPictureHeight);
+    // image(tallAbility, 1*cellSize, 1*cellSize, cellPictureWidth, cellPictureHeight);
+    // image(strongAbility, 1*cellSize, 0, cellPictureWidth, cellPictureHeight);
+    // image(shootingAbility, 0, 1*cellSize, cellPictureWidth, cellPictureHeight);
 }
 
 function displayGrid() {
@@ -64,9 +74,9 @@ function mousePressed() {
   let xcoord = floor((mouseX-xOffset)/cellSize);
   let ycoord = floor((mouseY-yOffset)/cellSize);
   console.log(xcoord, ycoord);
-  if (xcoord === 0 && ycoord === 0) {
-    chooseFast();
-  }
+  // if (xcoord === 0 && ycoord === 0) {
+  //   chooseFast();
+  // }
 }
 
 function checkCursor() {
@@ -81,4 +91,12 @@ function checkCursor() {
 function displayText() {
   textSize(40);
   text(txt, width/2.7, height/5);
+}
+
+function displayAbilities() {
+  imageMode(CORNER);
+  image(fastAbility, 0, 0, cellPictureWidth, cellPictureHeight);
+  image(tallAbility, 1*cellSize, 1*cellSize, cellPictureWidth, cellPictureHeight);
+  image(strongAbility, 1*cellSize, 0, cellPictureWidth, cellPictureHeight);
+  image(shootingAbility, 0, 1*cellSize, cellPictureWidth, cellPictureHeight);
 }
