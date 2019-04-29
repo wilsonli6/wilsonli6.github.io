@@ -28,7 +28,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   backgroundImage = loadImage("assets/stadium.png");
-  state === "nothing";
+  state = "choice";
   txt = "🔥Select Your Ability🔥";
   cellSize = 150;
   xOffset = width/2.5;
@@ -41,14 +41,14 @@ function draw() {
   background(225);
   xcoord = floor((mouseX-xOffset)/cellSize);
   ycoord = floor((mouseY-yOffset)/cellSize);
-  // if (state === "choice") {
+  if (state === "choice") {
     checkCursor();
     image(backgroundImage, 0, 0, width, height);
     displayText();
     translate(xOffset, yOffset);
     displayGrid();
     displayAbilities();
-  // }
+  }
     // checkCursor();
     // image(backgroundImage, 0, 0, width, height);
     // displayText();
