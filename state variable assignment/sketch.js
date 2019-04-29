@@ -9,6 +9,13 @@
 //the dimensions for the net were also kind of hard... so there's that
 let player, playerHeight, playerWidth, playerX, playerY, playerImage;
 let state;
+let fastAbility, tallAbility, strongAbility, shootingAbility;
+let cellPictureHeight, cellPictureWidth;
+let txt;
+let gridSize = 2;
+let cellSize;
+let xOffset;
+let yOffset;
 let playButton;
 let buttonX, buttonY, buttonWidth, buttonHeight, buttonScalar;
 let soccerBall, soccerBallX, soccerBallY, soccerBallWidth, soccerBallHeight, soccerBallScalar, soccerBallRadius;
@@ -17,6 +24,7 @@ let soccerNet, soccerNetX, soccerNetY, soccerNetWidth, soccerNetHeight, soccerNe
 let backgroundImage;
 let directionOfMovement;
 let gravity, acceleration, xVelocity, yVelocity, ground;
+let xcoord, ycoord;
 
 function preload() {
   //load images
@@ -30,6 +38,11 @@ function preload() {
     facingLeft: loadImage("assets/standing.png"),
     facingRight: loadImage("assets/standing.png")
   };
+//Images for the start screen
+  fastAbility = loadImage("assets/fast.png");
+  tallAbility = loadImage("assets/tall.png");
+  strongAbility = loadImage("assets/strong.png");
+  shootingAbility = loadImage("assets/shoot.png");
 }
 
 function setup() {
@@ -71,11 +84,31 @@ function setup() {
   playerY = height - playerHeight/2;
   directionOfMovement = "right"; 
   playerImage = player.facingLeft;
+
+  //startscreen measurements
+  backgroundImage = loadImage("assets/stadium.png");
+  txt = "🔥Select Your Ability🔥";
+  cellSize = 150;
+  xOffset = width/2.5;
+  yOffset = height/3;
+  cellPictureWidth = cellSize;
+  cellPictureHeight = cellSize;
 }
 
 function draw() {
   background(220);
+  xcoord = floor((mouseX-xOffset)/cellSize);
+  ycoord = floor((mouseY-yOffset)/cellSize);
+
   if (state === "startScreen") {
+    checkCursor();
+    image(backgroundImage, 0, 0, width, height);
+    displayText();
+    translate(xOffset, yOffset);
+    displayGrid();
+    displayAbilities();
+  }
+  if (state === "clickPlay") {
     displayMenu();
     checkCursor();
     playerX = width - playerWidth*7;
@@ -105,7 +138,7 @@ function draw() {
 // }
 
 function mousePressed() {
-  if (state === "startScreen") {
+  if (state === "clickPlay") {
     if (clickedOnButton(mouseX, mouseY)) {
       state = "playSoccer";
     }
@@ -123,6 +156,13 @@ function checkCursor() {
     mouseX <= buttonWidth &&
     mouseY >= buttonY &&
     mouseY <= buttonHeight) {
+    cursor("pointer");
+  }
+  else {
+    cursor(ARROW);
+  }
+
+  if (xcoord >= 0 && xcoord <= 1 && ycoord >= 0 && ycoord <= 1) {
     cursor("pointer");
   }
   else {
@@ -263,4 +303,25 @@ function goalScored() {
   if (Math.abs(soccerBallX - soccerNetX) <= 40 && soccerBallY > height/4){
     state = "startScreen";
   }
+}
+
+function displayGrid() {
+  for (let y = 0; y < gridSize; y++) {
+    for (let x = 0; x < gridSize; x++) {
+      rect(x*cellSize, y*cellSize, cellSize, cellSize);
+    }
+  }
+}
+
+function displayText() {
+  textSize(40);
+  text(txt, width/2.7, height/5);
+}
+
+function displayAbilities() {
+  imageMode(CORNER);
+  image(fastAbility, 0, 0, cellPictureWidth, cellPictureHeight);
+  image(tallAbility, 1*cellSize, 1*cellSize, cellPictureWidth, cellPictureHeight);
+  image(strongAbility, 1*cellSize, 0, cellPictureWidth, cellPictureHeight);
+  image(shootingAbility, 0, 1*cellSize, cellPictureWidth, cellPictureHeight);
 }
