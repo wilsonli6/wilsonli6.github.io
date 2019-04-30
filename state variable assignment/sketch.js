@@ -8,7 +8,7 @@
 //with the help of Mr. Schellenberg, I was able to create a gravity-like feel for the ball. I also had to figure out how to make simple animations for my character when it kicks the ball.
 //the dimensions for the net were also kind of hard... so there's that
 let player, playerHeight, playerWidth, playerX, playerY, playerImage;
-let state;
+let state, ability;
 let fastAbility, tallAbility, strongAbility, shootingAbility;
 let cellPictureHeight, cellPictureWidth;
 let txt;
@@ -38,7 +38,7 @@ function preload() {
     facingLeft: loadImage("assets/standing.png"),
     facingRight: loadImage("assets/standing.png")
   };
-//Images for the start screen
+  //Images for the start screen
   fastAbility = loadImage("assets/fast.png");
   tallAbility = loadImage("assets/tall.png");
   strongAbility = loadImage("assets/strong.png");
@@ -132,23 +132,41 @@ function draw() {
   }
 }
 
-// Eventually, I want to display a 'congratulations' when you score, but I tried to do that and it didn't work for some reason. Hence, I decided to leave it out for now.
-// if (state === "celebration") {
-//   displayCongrats();
-// }
-
 function mousePressed() {
   if (state === "clickPlay") {
     if (clickedOnButton(mouseX, mouseY)) {
       state = "playSoccer";
     }
   }
+
+  else if (state === "startScreen") {
+    if (xcoord === 0 && ycoord === 0) {
+      state = "clickPlay";
+      ability = "fast";
+    }
+
+    else if (xcoord === 0 && ycoord === 1) {
+      state = "clickPlay";
+      ability = "strong";
+    }
+
+    else if (xcoord === 1 && ycoord === 0) {
+      state = "clickPlay";
+      ability = "shoot";
+    }
+
+    else if (xcoord === 1 && ycoord === 1) {
+      state = "clickPlay";
+      ability = "tall";
+    }
+  }
 }
+
 function clickedOnButton(x, y) {
   return x >= buttonX - buttonWidth/2 &&
-				 x <= buttonX + buttonWidth/2 &&
-				 y >= buttonY - buttonHeight/2 &&
-         y <= buttonY + buttonHeight/2;
+				  x <= buttonX + buttonWidth/2 &&
+				  y >= buttonY - buttonHeight/2 &&
+          y <= buttonY + buttonHeight/2;
 }
 
 function checkCursor() {
@@ -158,6 +176,7 @@ function checkCursor() {
     mouseY <= buttonHeight) {
     cursor("pointer");
   }
+
   else {
     cursor(ARROW);
   }
@@ -165,6 +184,7 @@ function checkCursor() {
   if (xcoord >= 0 && xcoord <= 1 && ycoord >= 0 && ycoord <= 1) {
     cursor("pointer");
   }
+
   else {
     cursor(ARROW);
   }
@@ -192,13 +212,23 @@ function displayPlayer() {
 
 function movePlayer() {
   if (keyIsDown(LEFT_ARROW)) {
-    playerX -= 10;
+    if (ability === "fast") {
+      playerX -= 15;
+    }
+    else {
+      playerX -= 10;
+    }
     directionOfMovement = "left";
     playerImage = player.facingLeft;
   }
 
   if (keyIsDown(RIGHT_ARROW)) {
-    playerX += 10;
+    if (ability === "fast") {
+      playerX += 15;
+    }
+    else {
+      playerX += 10;
+    }
     directionOfMovement = "right";
     playerImage = player.facingRight;
   }
@@ -232,7 +262,12 @@ function ballIsKicked() {
     soccerBallX += soccerBallSpeedX;
     acceleration = -5;
     if (soccerBallY < ground) {
-      xVelocity = 15;
+      if (ability === "strong") {
+        xVelocity = 30;
+      }
+      else {
+        xVelocity = 15;
+      }
     }
   }
   if (playerImage === player.kickingLeft && Math.abs(playerX - soccerBallX) <= 126 && playerX - soccerBallX >=-50

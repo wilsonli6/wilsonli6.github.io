@@ -49,16 +49,6 @@ function draw() {
     displayGrid();
     displayAbilities();
   }
-    // checkCursor();
-    // image(backgroundImage, 0, 0, width, height);
-    // displayText();
-    // translate(xOffset, yOffset);
-    // displayGrid();
-    // imageMode(CORNER);
-    // image(fastAbility, 0, 0, cellPictureWidth, cellPictureHeight);
-    // image(tallAbility, 1*cellSize, 1*cellSize, cellPictureWidth, cellPictureHeight);
-    // image(strongAbility, 1*cellSize, 0, cellPictureWidth, cellPictureHeight);
-    // image(shootingAbility, 0, 1*cellSize, cellPictureWidth, cellPictureHeight);
 }
 
 function displayGrid() {
