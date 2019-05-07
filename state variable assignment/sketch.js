@@ -8,6 +8,7 @@
 //with the help of Mr. Schellenberg, I was able to create a gravity-like feel for the ball. I also had to figure out how to make simple animations for my character when it kicks the ball.
 //the dimensions for the net were also kind of hard... so there's that
 let player, playerHeight, playerWidth, playerX, playerY, playerImage;
+let bigPlayer;
 let state, ability;
 let fastAbility, tallAbility, strongAbility, shootingAbility;
 let cellPictureHeight, cellPictureWidth;
@@ -25,6 +26,7 @@ let backgroundImage;
 let directionOfMovement;
 let gravity, acceleration, xVelocity, yVelocity, ground;
 let xcoord, ycoord;
+let song;
 
 function preload() {
   //load images
@@ -38,11 +40,22 @@ function preload() {
     facingLeft: loadImage("assets/standing.png"),
     facingRight: loadImage("assets/standing.png")
   };
+
+  bigPlayer = {
+    kickingRight: loadImage("assets/statureRight.png"),
+    kickingLeft : loadImage("assets/statureLeft.png"),
+    facingLeft: loadImage("assets/stature.png"),
+    facingRight: loadImage("assets/stature.png")
+  };
   //Images for the start screen
   fastAbility = loadImage("assets/fast.png");
   tallAbility = loadImage("assets/tall.png");
   strongAbility = loadImage("assets/strong.png");
   shootingAbility = loadImage("assets/shoot.png");
+
+  //Song
+  soundFormats("mp3");
+  song = loadSound("assets/music.mp3");
 }
 
 function setup() {
@@ -93,6 +106,11 @@ function setup() {
   yOffset = height/3;
   cellPictureWidth = cellSize;
   cellPictureHeight = cellSize;
+
+  song.setVolume(1);
+  if (state === "startScreen") {
+    song.play();
+  }
 }
 
 function draw() {
@@ -208,6 +226,9 @@ function displayNet() {
 function displayPlayer() {
   imageMode(CENTER);
   image(playerImage, playerX, playerY, playerWidth, playerHeight);
+  if (ability === "tall") {
+    image();
+  }
 }
 
 function movePlayer() {
