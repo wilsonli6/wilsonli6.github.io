@@ -4,6 +4,7 @@
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
+//figure out the egg
 
 let triangleVertices = [
   {x:400, y:100},
